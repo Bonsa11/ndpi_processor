@@ -85,16 +85,20 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
                 create_macro = True
 
             if create_macro or create_thumb:
-                with open_slide(file_path) as ndpi:
-                    if create_thumb:
-                        level = ndpi.level_count - 1
-                        size = ndpi.level_dimensions[level]
-                        img = ndpi.read_region((0, 0), level, size)
-                        img.save(thumbnail_path)
+                try:
+                    with open_slide(file_path) as ndpi:
+                        if create_thumb:
+                            level = ndpi.level_count - 1
+                            size = ndpi.level_dimensions[level]
+                            img = ndpi.read_region((0, 0), level, size)
+                            img.save(thumbnail_path)
 
-                    if create_macro:
-                        img = ndpi.associated_images['macro'].rotate(270, expand=True)
-                        img.thumbnail((800, 800))  # setting max size
-                        img.save(macro_path)
+                        if create_macro:
+                            img = ndpi.associated_images['macro'].rotate(270, expand=True)
+                            img.thumbnail((800, 800))  # setting max size
+                            img.save(macro_path)
+                except Exception as e:
+                    print(f' !!! {file_name} failed to process : {e} !!!')
+                    move(file_path, os.path.join(os.path.join(root_folder, images_folder, 'errored_images', file_name)))
 
             print(f'\t\t processing took {dt.now() - init_time}')
