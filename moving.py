@@ -27,7 +27,7 @@ def move(src_root, dst_root, archive_folder, error_folder, run_time):
                     print(f'{file} found in previous batch {batch}')
                     found_img = True
                 except Exception as e:
-                    print(f'failed to move {file} to archive')
+                    print(f'failed to move {file} to archive: {e}')
                 break
 
         if not found_img:
@@ -42,3 +42,5 @@ def move(src_root, dst_root, archive_folder, error_folder, run_time):
                 pass
 
         index += 1
+        if index == len(files):
+            break
