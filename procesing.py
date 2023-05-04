@@ -103,6 +103,6 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
                     log_path = os.path.join(root_folder, images_folder, 'errored_images', f"{''.join(file_name.split('.')[:-1])}.txt")
                     if not os.path.exists(log_path):
                         with open(log_path, 'w') as f:
-                            f.write(e)
+                            f.write(f'{e}')
 
             print(f'\t\t processing took {dt.now() - init_time}')
