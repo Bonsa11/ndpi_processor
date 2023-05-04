@@ -7,12 +7,9 @@ with open("./config.yaml", "r") as stream:
     except yaml.YAMLError as exc:
         print(exc)
 
-if os.name == 'nt':
-    if hasattr(os, 'add_dll_directory'):
-        # Python >= 3.8 on Windows
-        with os.add_dll_directory(config['OPENSLIDE_PATH']):
-            from openslide import open_slide
-    else:
+if os.name == 'nt' and hasattr(os, 'add_dll_directory'):
+    # Python >= 3.8 on Windows
+    with os.add_dll_directory(config['OPENSLIDE_PATH']):
         from openslide import open_slide
 else:
     from openslide import open_slide
