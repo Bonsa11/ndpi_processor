@@ -38,7 +38,7 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
             os.path.isfile(os.path.join(root_folder, images_folder, f))]
     img_batches = [imgs[x:x + 30] for x in range(0, len(imgs), 30)]
     fldrs = [fldr for fldr in os.listdir(os.path.join(root_folder, images_folder)) if
-             os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_']
+             (os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_' in fldr)]
     last_batch = int(sorted(fldrs)[-1][6:])
 
     for img_batch in img_batches:
