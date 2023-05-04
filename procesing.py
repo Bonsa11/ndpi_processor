@@ -56,7 +56,7 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
 
     # loop through images in batch folders and produce thumbnail and qc image for each image
     for batch in [fldr for fldr in os.listdir(os.path.join(root_folder, images_folder)) if
-                  os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_']:
+                  (os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_' in fldr)]:
 
         print(f'processing batch {batch}')
 
