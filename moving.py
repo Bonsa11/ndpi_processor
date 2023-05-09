@@ -11,7 +11,7 @@ def move(src_root, dst_root, archive_folder, error_folder, run_time):
         print('found no files to move, moving onto processing images')
         return 0
     else:
-        while dt.now()-init_time < run_time:
+        while dt.now() - init_time < run_time:
             # get file
             file = files[index]
 
