@@ -40,6 +40,7 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
     fldrs = [fldr for fldr in os.listdir(os.path.join(root_folder, images_folder)) if
              (os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_' in fldr)]
     last_batch = 1
+    new_folder = f'batch_{last_batch}'
 
     for img_batch in img_batches:
         # create new batch folders
