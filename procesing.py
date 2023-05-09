@@ -39,12 +39,13 @@ def process(root_folder, images_folder, thumbnail_folder, qc_folder):
     img_batches = [imgs[x:x + 30] for x in range(0, len(imgs), 30)]
     fldrs = [fldr for fldr in os.listdir(os.path.join(root_folder, images_folder)) if
              (os.path.isdir(os.path.join(root_folder, images_folder, fldr)) and 'batch_' in fldr)]
-    last_batch = int(sorted(fldrs)[-1][6:])
+    last_batch = 1
 
     for img_batch in img_batches:
         # create new batch folders
-        last_batch += 1
-        new_folder = f'batch_{last_batch}'
+        while os.path.exists(os.path.join(root_folder, images_folder, new_folder)):
+            last_batch += 1
+            new_folder = f'batch_{last_batch}'
         os.makedirs(os.path.join(root_folder, images_folder, new_folder))
         os.makedirs(os.path.join(root_folder, qc_folder, new_folder))
         os.makedirs(os.path.join(root_folder, thumbnail_folder, new_folder))
